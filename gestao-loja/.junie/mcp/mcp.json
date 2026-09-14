@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "D:\\Cursos_e_Formacao\\ATEC\\Processos\\UC0604PHP\\php-8.5.10-Win32-vs17-x64\\php.exe",
+            "args": [
+                "C:\\Users\\rtbil\\Documents\\Codex\\gestao-loja\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
