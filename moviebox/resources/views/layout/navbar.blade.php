@@ -48,6 +48,21 @@
                         Géneros
                     </a>
                 </li>
+                <li class="nav-item">
+                    <span class="nav-link">
+                        <i class="bi bi-person me-1"></i>
+                        nome do user
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a
+                        href="#"
+                        class="nav-link"
+                    >
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login
+                    </a>
+                </li>
 
             </ul>
 
