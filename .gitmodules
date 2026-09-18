@@ -1,0 +1,3 @@
+[submodule "gestao-loja"]
+	path = gestao-loja
+	url = https://github.com/RicTavares82/gestao-loja.git
