@@ -1,3 +1,6 @@
 [submodule "gestao-loja"]
 	path = gestao-loja
 	url = https://github.com/RicTavares82/gestao-loja.git
+[submodule "VetCare_ProjFinal"]
+	path = VetCare_ProjFinal
+	url = https://github.com/RicTavares82/VetCare_ProjFinal.git
