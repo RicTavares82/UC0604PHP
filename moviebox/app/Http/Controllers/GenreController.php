@@ -12,9 +12,18 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genre::all();
+        if($this->routeArea() === 'admin'){
+            $genres=Genre::withTrashed()->get();
+            //$genres=Genre::onlyTrashed()->get();
+        }else{
+            //editor ou user
+            $genres = Genre::all();
+        }
+
+
+        $area=$this->routeArea();
         //dd($genres);
-        return view('generos.index', compact('genres'));
+        return view('generos.index', compact('genres','area'));
     }
 
     /**
@@ -36,7 +45,7 @@ class GenreController extends Controller
             'name'=>'required|min:3|max:100'
         ]);
         $genero=Genre::create($validated);
-        return redirect()->route('genres.index')
+        return redirect()->route($this->routeArea().'.genres.index')
             ->with('success',"O género {$genero->name} foi criado com sucesso, com o ID {$genero->id}!");
 
     }
@@ -61,7 +70,7 @@ class GenreController extends Controller
         ]);
         $genre->update($validated);
         $genre->save();
-        return redirect()->route('genres.index')
+        return redirect()->route($this->routeArea().'.genres.index')
             ->with('success',"O género {$genre->name} foi atualizado com sucesso");
 
     }
@@ -69,12 +78,20 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(String $id)
     {
+        $genre=Genre::withTrashed()->findOrFail($id);
+        if($genre->trashed()){
+            $genre->forceDelete();
+
+            return redirect()->route($this->routeArea().'.genres.index')
+                ->with('success','Género Apagado com sucesso!')
+                ->with('warning','Azar já não pode ser recuperado!');
+        }
 
         $genre->delete();
-        return redirect()->route('genres.index')
-            ->with('success','Género Apagado com sucesso!')
-            ->with('warning','Azar já não pode ser recuperado!');
+        return redirect()->route($this->routeArea().'.genres.index')
+            ->with('success','Género Apagado Logicamente!');
+
     }
 }

@@ -17,11 +17,12 @@
                 </p>
 
             </div>
-
-            <a href="{{route('genres.create')}}" class="btn btn-primary">
-                <i class="bi bi-plus-lg me-1"></i>
-                Novo Género
-            </a>
+            @role('admin')
+                <a href="{{route('admin.genres.create')}}" class="btn btn-primary">
+                    <i class="bi bi-plus-lg me-1"></i>
+                    Novo Género
+                </a>
+            @endrole
 
         </div>
 
@@ -38,39 +39,52 @@
                         <tr>
                             <th>#</th>
                             <th>Nome</th>
+                            @hasanyrole('admin|editor')
                             <th class="text-end table-actions">Ações</th>
+                            @endhasanyrole
+
                         </tr>
                         </thead>
 
                         <tbody>
 
                         @foreach($genres as $g)
-                            <tr>
+                            <tr @if($g->trashed()) class="bg-warning" @endif>
                                 <td>{{$g->id}}</td>
                                 <td>{{$g->name}}</td>
-
+                                @hasanyrole('admin|editor')
                                 <td class="text-end table-actions">
-
-                                    <a
-                                        href="{{route('genres.edit',$g)}}"
-                                        class="btn btn-sm btn-outline-primary"
-                                    >
+                                    <a href="{{route($area.'.genres.edit',$g)}}" class="btn btn-sm btn-outline-primary" >
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{route('genres.destroy',$g)}}" method="POST" style="display: contents;">
+                                    @role('admin')
+
+                                    <form action="{{route('admin.genres.destroy',$g)}}" method="POST" style="display: contents;">
                                         @csrf
                                         @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-sm btn-outline-danger"
-                                        >
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
+                                        @if($g->trashed())
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-outline-danger"
+                                            >
+                                                <i class="bi bi-file-earmark-x"></i>
+                                            </button>
 
+                                        @else
+                                            <button
+                                                type="submit"
+                                                class="btn btn-sm btn-outline-warning"
+                                            >
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        @endif
+
+                                    </form>
+                                    @endrole
 
 
                                 </td>
+                                @endhasanyrole
                             </tr>
                         @endforeach
 

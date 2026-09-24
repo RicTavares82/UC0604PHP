@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Genre extends Model
 {
+    use SoftDeletes;
     /**
      * Convenção
      * Nome da tabela é o plural do nome da classe

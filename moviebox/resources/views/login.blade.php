@@ -35,7 +35,7 @@
                 <div class="card-body p-4">
 
                     <form
-                        action="{{ route('login.store') }}"
+                        action="{{route('login')}}"
                         method="POST"
                     >
 
@@ -139,6 +139,27 @@
                         </button>
 
                     </form>
+                    <a
+                        href="{{route('login.fast','1')}}"
+                        class="btn btn-warning w-100 mt-1"
+                    >
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login Admin
+                    </a>
+                    <a
+                        href="{{route('login.fast','2')}}"
+                        class="btn btn-success w-100 mt-1"
+                    >
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login Editor
+                    </a>
+                    <a
+                        href="{{route('login.fast','3')}}"
+                        class="btn btn-danger w-100 mt-1"
+                    >
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        Login User
+                    </a>
 
                 </div>
 

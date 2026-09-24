@@ -15,6 +15,7 @@
 <body>
 
 <!-- Navbar -->
+
 @include('layout.navbar')
 
 
